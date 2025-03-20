@@ -1,5 +1,0 @@
-﻿namespace Matrics2dLib
-{
-
-    }
-}
