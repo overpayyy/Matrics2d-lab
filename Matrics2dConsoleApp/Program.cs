@@ -1,10 +1,3 @@
-﻿namespace Matrics2dConsoleApp
-{
-    internal class Program
-    {
-        static void Main(string[] args)
-        {
-            Console.WriteLine("Hello, World!");
-        }
-    }
-}
+﻿using Matrics2dLib;
+var m = new Matrix2d(1,2,3,4);
+Console.WriteLine(m);

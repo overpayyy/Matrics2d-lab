@@ -1,7 +1,8 @@
-﻿namespace Matrics2dLib;
+﻿#nullable disable
+namespace Matrics2dLib;
 
 // immutable 2x2 matrix
-public class Matrix2d
+public class Matrix2d : IEquatable<Matrix2d>
 {
     private int _a, _b, _c, _d;
 
@@ -28,5 +29,11 @@ public class Matrix2d
 
     // methods
     override public string ToString() => $"[{_a}, {_b}]\n[{_c}, {_d}]";
+
+    public bool Equals(Matrix2d other)
+    {
+        if (other is null) return false;
+        return _a == other._a && _b == other._b && _c == other._c && _d == other._d;
+    }
 }
 
