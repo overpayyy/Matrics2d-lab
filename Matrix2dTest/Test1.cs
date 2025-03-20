@@ -21,7 +21,7 @@ namespace Matrix2dTest
         [TestMethod]
         public void Konstructor_BezArgumentow_Poprawnie_OK()
         {
-            var m = new Matrix2d(1, 2, 3, 4);
+            var m = new Matrix2d();
 
             // Assert
             Assert.AreEqual(1, m.A);
