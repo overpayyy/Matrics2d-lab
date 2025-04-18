@@ -78,5 +78,61 @@ public class Matrix2d : IEquatable<Matrix2d>
     public static implicit operator Matrix2d(int[,] m)
         => new Matrix2d(m[0, 0], m[0, 1], m[1, 0], m[1, 1]);
     #endregion
+
+    #region Transpose
+    // metoda transpozycji
+    public static Matrix2d Transpose(Matrix2d matrix)
+    {
+        return new Matrix2d(matrix._a, matrix._c, matrix._b, matrix._d);
+    }
+    #endregion
+
+    #region Determinant
+    // wyznacznik jako metoda statyczna
+    public static int Determinant(Matrix2d matrix)
+    {
+        return matrix._a * matrix._d - matrix._b * matrix._c;
+    }
+
+    // wyznacznik jako metoda instancji
+    public int Det()
+    {
+        return _a * _d - _b * _c;
+    }
+    #endregion
+
+    #region Parse
+    // metoda parsowania
+    public static Matrix2d Parse(string input)
+    {
+        if (string.IsNullOrWhiteSpace(input))
+            throw new FormatException("Input string is null or empty.");
+
+        // Walidacja formatu
+        if (!input.StartsWith("[") || !input.EndsWith("]") || input.Count(c => c == '[') != 2 || input.Count(c => c == ']') != 2)
+            throw new FormatException("Invalid format.");
+
+        // Usuwanie nawiasów i dzielenie
+        input = input.Trim('[', ']');
+        var rows = input.Split("], [");
+        if (rows.Length != 2)
+            throw new FormatException("Invalid format.");
+
+        try
+        {
+            var row1 = rows[0].Split(',').Select(int.Parse).ToArray();
+            var row2 = rows[1].Split(',').Select(int.Parse).ToArray();
+
+            if (row1.Length != 2 || row2.Length != 2)
+                throw new FormatException("Invalid matrix dimensions.");
+
+            return new Matrix2d(row1[0], row1[1], row2[0], row2[1]);
+        }
+        catch
+        {
+            throw new FormatException("Invalid format.");
+        }
+    }
+    #endregion
 }
 
